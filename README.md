@@ -2,7 +2,10 @@
 ### Version 1.0.0
 
 ## About
-`mood-line` is a minimal mode-line configuration that aims to replicate some of the features of the `doom-modeline` package.
+
+`mood-line` is a minimal mode-line configuration that aims to replicate some of the features of the
+[doom-modeline](https://github.com/seagle0128/doom-modeline)
+package.
 
 ## Features
 
