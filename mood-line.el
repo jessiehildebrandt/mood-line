@@ -87,6 +87,7 @@
 ;; Helper functions
 ;;
 
+;;;###autoload
 (defun mood-line-format (left right)
   "Return a string of `window-width' length containing LEFT and RIGHT, aligned respectively."
   (let ((reserve (length right)))
@@ -110,6 +111,7 @@
 
 ;; Window update function
 (defvar-local mood-line--current-window (frame-selected-window))
+;;;###autoload
 (defun mood-line--update-selected-window (&rest _)
   "Update the `mood-line--current-window' variable."
   (when (frame-selected-window)
@@ -119,6 +121,7 @@
 
 ;; VC update function
 (defvar-local mood-line--vc-text nil)
+;;;###autoload
 (defun mood-line--update-vc-segment (&rest _)
   "Update `mood-line--vc-text' against the current VCS state."
   (setq mood-line--vc-text
@@ -149,6 +152,7 @@
 
 ;; Flycheck update function
 (defvar-local mood-line--flycheck-text nil)
+;;;###autoload
 (defun mood-line--update-flycheck-segment (&optional status)
   "Update `mood-line--flycheck-text' against the reported flycheck STATUS."
   (setq mood-line--flycheck-text
@@ -172,6 +176,7 @@
 ;; Segments
 ;;
 
+;;;###autoload
 (defun mood-line-segment-modified ()
   "Displays a color-coded buffer modification indicator in the mode-line."
   (propertize
@@ -182,15 +187,18 @@
      "   ")
    'face 'mood-line-modified))
 
+;;;###autoload
 (defun mood-line-segment-buffer-name ()
   "Displays the name of the current buffer in the mode-line."
   (concat (propertize "%b" 'face 'mode-line-buffer-id) "  "))
 
+;;;###autoload
 (defun mood-line-segment-anzu ()
   "Displays color-coded anzu status information in the mode-line (if available)."
   (when anzu--state
     (concat (anzu--update-mode-line) "  ")))
 
+;;;###autoload
 (defun mood-line-segment-multiple-cursors ()
   "Displays the number of active multiple-cursors in the mode-line (if available)."
   (when multiple-cursors-mode
@@ -198,6 +206,7 @@
             (format #("%d" 0 2 (face font-lock-warning-face)) (mc/num-cursors))
             "  ")))
 
+;;;###autoload
 (defun mood-line-segment-position ()
   "Displays the current cursor position in the mode-line."
   (concat "%l:%c "
@@ -206,6 +215,7 @@
                                      'mode-line-inactive))
           "  "))
 
+;;;###autoload
 (defun mood-line-segment-encoding ()
   "Displays the encoding and EOL style of the buffer in the mode-line."
   (concat (pcase (coding-system-eol-type buffer-file-coding-system)
@@ -218,10 +228,12 @@
                   (t (upcase (symbol-name (plist-get sys :name))))))
           "  "))
 
+;;;###autoload
 (defun mood-line-segment-vc ()
   "Displays color-coded version control information in the mode-line."
   mood-line--vc-text)
 
+;;;###autoload
 (defun mood-line-segment-major-mode ()
   "Displays the current major mode in the mode-line."
   (propertize "%m  "
@@ -229,6 +241,7 @@
                         'bold
                       'mood-line-status-grayed-out)))
 
+;;;###autoload
 (defun mood-line-segment-flycheck ()
   "Displays color-coded flycheck information in the mode-line (if available)."
   mood-line--flycheck-text)
@@ -237,6 +250,7 @@
 ;; Activation function
 ;;
 
+;;;###autoload
 (defun mood-line-activate ()
   "Replace the current mode-line with mood-line."
   (interactive)
