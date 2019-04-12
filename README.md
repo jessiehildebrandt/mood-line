@@ -19,6 +19,14 @@ package.
 
 * Lightweight with no dependencies
 
+## Installation
+
+To enable `mood-line`, place this in your configuration file after loading the package:
+
+`(mood-line-activate)`
+
+The activation command can also be run interactively if desired.
+
 ## Known Issues
 
 * No known issues.

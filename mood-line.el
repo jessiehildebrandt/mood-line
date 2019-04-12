@@ -19,6 +19,9 @@
 ;; * Version control status indicator
 ;; * Flycheck status indicator
 ;; * Lightweight with no dependencies
+;;
+;; To enable mood-line:
+;; (mood-line-activate)
 
 ;;; License:
 ;;
