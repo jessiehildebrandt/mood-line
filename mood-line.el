@@ -114,7 +114,6 @@
 
 ;; Window update function
 (defvar-local mood-line--current-window (frame-selected-window))
-;;;###autoload
 (defun mood-line--update-selected-window (&rest _)
   "Update the `mood-line--current-window' variable."
   (when (frame-selected-window)
@@ -124,7 +123,6 @@
 
 ;; VC update function
 (defvar-local mood-line--vc-text nil)
-;;;###autoload
 (defun mood-line--update-vc-segment (&rest _)
   "Update `mood-line--vc-text' against the current VCS state."
   (setq mood-line--vc-text
@@ -155,7 +153,6 @@
 
 ;; Flycheck update function
 (defvar-local mood-line--flycheck-text nil)
-;;;###autoload
 (defun mood-line--update-flycheck-segment (&optional status)
   "Update `mood-line--flycheck-text' against the reported flycheck STATUS."
   (setq mood-line--flycheck-text
