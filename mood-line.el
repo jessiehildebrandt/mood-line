@@ -43,6 +43,23 @@
 ;;; Code:
 
 ;;
+;; Variable declarations
+;;
+
+(defvar mood-line--current-window)
+(defvar flycheck-current-errors)
+(defvar anzu--state)
+(defvar multiple-cursors-mode)
+
+;;
+;; Function prototypes
+;;
+
+(declare-function flycheck-count-errors "flycheck" (errors))
+(declare-function anzu--update-mode-line "anzu" ())
+(declare-function mc/num-cursors "multiple-cursors" ())
+
+;;
 ;; Config
 ;;
 
