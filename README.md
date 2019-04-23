@@ -1,6 +1,9 @@
 # mood-line
 ### Version 1.0.1
 
+[![MELPA](https://melpa.org/packages/mood-line-badge.svg)](https://melpa.org/#/mood-line)
+[![MELPA Stable](https://stable.melpa.org/packages/mood-line-badge.svg)](https://stable.melpa.org/#/mood-line)
+
 ## About
 
 `mood-line` is a minimal mode-line configuration that aims to replicate some of the features of the
