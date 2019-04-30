@@ -22,6 +22,10 @@ package.
 
 * Lightweight with no dependencies
 
+## Preview
+
+![Preview Image](https://gitlab.com/jessieh/mood-line/raw/assets/mood-line.png "Preview Image")
+
 ## Installation
 
 To enable `mood-line`, place this in your configuration file after loading the package:
