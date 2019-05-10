@@ -77,7 +77,7 @@
   "Face used for generic status indicators in the mode-line."
   :group 'mood-line)
 
-(defface mood-line-status-good
+(defface mood-line-status-success
   '((t (:inherit (success))))
   "Face used for success status indicators in the mode-line."
   :group 'mood-line)
@@ -183,7 +183,7 @@
                                          'face (if .error
                                                    'mood-line-status-error
                                                  'mood-line-status-warning))))
-                       (propertize "✔ Good  " 'face 'mood-line-status-good)))
+                       (propertize "✔ Good  " 'face 'mood-line-status-success)))
           ('running (propertize "● Checking  " 'face 'mood-line-status-info))
           ('no-checker "")
           ('errored (propertize "✖ Error  " 'face 'mood-line-status-error))
