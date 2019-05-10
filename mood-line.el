@@ -21,7 +21,7 @@
 ;; * Lightweight with no dependencies
 ;;
 ;; To enable mood-line:
-;; (mood-line-activate)
+;; (mood-line-mode)
 
 ;;; License:
 ;;
@@ -257,44 +257,70 @@
 ;; Activation function
 ;;
 
+;; Store the default mode-line format
+(defvar mood-line--default-mode-line mode-line-format)
+
 ;;;###autoload
-(defun mood-line-activate ()
-  "Replace the current mode-line with mood-line."
-  (interactive)
+(define-minor-mode mood-line-mode
+  "Toggle mood-line on or off."
+  :group 'mood-line
+  :global t
+  :lighter nil
+  (if mood-line-mode
+      (progn
 
-  ;; Setup flycheck hooks (if available)
-  (add-hook 'flycheck-status-changed-functions #'mood-line--update-flycheck-segment)
-  (add-hook 'flycheck-mode-hook #'mood-line--update-flycheck-segment)
+        ;; Setup flycheck hooks
+        (add-hook 'flycheck-status-changed-functions #'mood-line--update-flycheck-segment)
+        (add-hook 'flycheck-mode-hook #'mood-line--update-flycheck-segment)
 
-  ;; Setup VC hooks (if available)
-  (add-hook 'find-file-hook #'mood-line--update-vc-segment)
-  (add-hook 'after-save-hook #'mood-line--update-vc-segment)
-  (advice-add #'vc-refresh-state :after #'mood-line--update-vc-segment)
+        ;; Setup VC hooks
+        (add-hook 'find-file-hook #'mood-line--update-vc-segment)
+        (add-hook 'after-save-hook #'mood-line--update-vc-segment)
+        (advice-add #'vc-refresh-state :after #'mood-line--update-vc-segment)
 
-  ;; Setup window update hooks
-  (add-hook 'window-configuration-change-hook #'mood-line--update-selected-window)
-  (add-hook 'focus-in-hook #'mood-line--update-selected-window)
-  (advice-add #'handle-switch-frame :after #'mood-line--update-selected-window)
-  (advice-add #'select-window :after #'mood-line--update-selected-window)
+        ;; Setup window update hooks
+        (add-hook 'window-configuration-change-hook #'mood-line--update-selected-window)
+        (add-hook 'focus-in-hook #'mood-line--update-selected-window)
+        (advice-add #'handle-switch-frame :after #'mood-line--update-selected-window)
+        (advice-add #'select-window :after #'mood-line--update-selected-window)
 
-  ;; Set the new mode-line-format
-  (setq-default mode-line-format
-                '((:eval
-                   (mood-line-format
-                    ;; Left
-                    (format-mode-line
-                     '((:eval (mood-line-segment-modified))
-                       (:eval (mood-line-segment-buffer-name))
-                       (:eval (mood-line-segment-anzu))
-                       (:eval (mood-line-segment-multiple-cursors))
-                       (:eval (mood-line-segment-position))))
+        ;; Set the new mode-line-format
+        (setq-default mode-line-format
+                      '((:eval
+                         (mood-line-format
+                          ;; Left
+                          (format-mode-line
+                           '((:eval (mood-line-segment-modified))
+                             (:eval (mood-line-segment-buffer-name))
+                             (:eval (mood-line-segment-anzu))
+                             (:eval (mood-line-segment-multiple-cursors))
+                             (:eval (mood-line-segment-position))))
 
-                    ;; Right
-                    (format-mode-line
-                     '((:eval (mood-line-segment-vc))
-                       (:eval (mood-line-segment-major-mode))
-                       (:eval (mood-line-segment-flycheck))
-                       " ")))))))
+                          ;; Right
+                          (format-mode-line
+                           '((:eval (mood-line-segment-vc))
+                             (:eval (mood-line-segment-major-mode))
+                             (:eval (mood-line-segment-flycheck))
+                             " ")))))))
+    (progn
+
+      ;; Remove flycheck hooks
+      (remove-hook 'flycheck-status-changed-functions #'mood-line--update-flycheck-segment)
+      (remove-hook 'flycheck-mode-hook #'mood-line--update-flycheck-segment)
+
+      ;; Remove VC hooks
+      (remove-hook 'file-find-hook #'mood-line--update-vc-segment)
+      (remove-hook 'after-save-hook #'mood-line--update-vc-segment)
+      (advice-remove #'vc-refresh-state #'mood-line--update-vc-segment)
+
+      ;; Remove window update hooks
+      (remove-hook 'window-configuration-change-hook #'mood-line--update-selected-window)
+      (remove-hook 'focus-in-hook #'mood-line--update-selected-window)
+      (advice-remove #'handle-switch-frame #'mood-line--update-selected-window)
+      (advice-remove #'select-window #'mood-line--update-selected-window)
+
+      ;; Restore the original mode-line format
+      (setq-default mode-line-format mood-line--default-mode-line))))
 
 ;;
 ;; Provide mood-line
