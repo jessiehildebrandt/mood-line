@@ -1,6 +1,9 @@
 # mood-line
 ### Version 1.1.0
 
+[![MELPA](https://melpa.org/packages/mood-line-badge.svg)](https://melpa.org/#/mood-line)
+[![MELPA Stable](https://stable.melpa.org/packages/mood-line-badge.svg)](https://stable.melpa.org/#/mood-line)
+
 ## About
 
 `mood-line` is a minimal mode-line configuration that aims to replicate some of the features of the
@@ -18,6 +21,10 @@ package.
 * Flycheck status indicator
 
 * Lightweight with no dependencies
+
+## Preview
+
+![Preview Image](https://gitlab.com/jessieh/mood-line/raw/assets/mood-line.png "Preview Image")
 
 ## Installation
 
