@@ -23,9 +23,9 @@ package.
 
 To enable `mood-line`, place this in your configuration file after loading the package:
 
-`(mood-line-activate)`
+`(mood-line-mode)`
 
-The activation command can also be run interactively if desired.
+Disabling `mood-line` can be accomplished by toggling `mood-line-mode` off.
 
 ## Known Issues
 
