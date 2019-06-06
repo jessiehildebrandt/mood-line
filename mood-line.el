@@ -67,6 +67,11 @@
   "A minimal mode-line configuration inspired by doom-modeline."
   :group 'mode-line)
 
+(defcustom mood-line-show-point nil
+  "If t, the value of `point' will be displayed next to the cursor position in the mode-line."
+  :group 'mood-line
+  :type 'boolean)
+
 (defface mood-line-status-grayed-out
   '((t (:inherit (font-lock-doc-face))))
   "Face used for neutral or inactive status indicators in the mode-line."
@@ -220,7 +225,13 @@
 
 (defun mood-line-segment-position ()
   "Displays the current cursor position in the mode-line."
-  (concat "%l:%c "
+  (concat "%l:%c"
+          (when mood-line-show-point
+            (concat ":"
+                    (propertize (format "%d" (point)) 'face (if (mood-line-is-active)
+                                                                'mood-line-unimportant
+                                                              'mode-line-inactive))))
+          " "
           (propertize "%p%%" 'face (if (mood-line-is-active)
                                        'mood-line-unimportant
                                      'mode-line-inactive))
