@@ -208,12 +208,12 @@
 
 (defun mood-line-segment-anzu ()
   "Displays color-coded anzu status information in the mode-line (if available)."
-  (when anzu--state
+  (when (and (boundp 'anzu--state) anzu--state)
     (concat (anzu--update-mode-line) "  ")))
 
 (defun mood-line-segment-multiple-cursors ()
   "Displays the number of active multiple-cursors in the mode-line (if available)."
-  (when multiple-cursors-mode
+  (when (and (boundp 'multiple-cursors-mode) multiple-cursors-mode)
     (concat "MC:"
             (format #("%d" 0 2 (face font-lock-warning-face)) (mc/num-cursors))
             "  ")))
