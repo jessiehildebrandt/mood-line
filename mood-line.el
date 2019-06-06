@@ -270,6 +270,11 @@
   "Displays color-coded flycheck information in the mode-line (if available)."
   mood-line--flycheck-text)
 
+(defun mood-line-segment-process ()
+  "Displays the current value of `mode-line-process' in the mode-line."
+  (when mode-line-process
+    (list mode-line-process "  ")))
+
 ;;
 ;; Activation function
 ;;
@@ -319,6 +324,7 @@
                              (:eval (mood-line-segment-major-mode))
                              (:eval (mood-line-segment-global-mode-string))
                              (:eval (mood-line-segment-flycheck))
+                             (:eval (mood-line-segment-process))
                              " ")))))))
     (progn
 
