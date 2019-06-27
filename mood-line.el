@@ -262,9 +262,9 @@
 
 (defun mood-line-segment-global-mode-string ()
   "Displays the current value of `global-mode-string' in the mode-line."
-  (when (not (string= (mapconcat 'concat (mapcar 'eval global-mode-string) "") ""))
-    (propertize "%M  "
-                'face 'mood-line-status-grayed-out)))
+  (let ((global (format-mode-line global-mode-string 'mood-line-status-grayed-out)))
+    (unless (string-empty-p global)
+      (concat global " "))))
 
 (defun mood-line-segment-flycheck ()
   "Displays color-coded flycheck information in the mode-line (if available)."
