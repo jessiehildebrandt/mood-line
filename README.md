@@ -16,6 +16,8 @@ package.
 
 * Anzu and multiple-cursors counters
 
+* Encoding and EOL style indicator
+
 * Version control status indicator
 
 * Flycheck status indicator

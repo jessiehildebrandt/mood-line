@@ -320,7 +320,8 @@
 
                           ;; Right
                           (format-mode-line
-                           '((:eval (mood-line-segment-vc))
+                           '((:eval (mood-line-segment-encoding))
+                             (:eval (mood-line-segment-vc))
                              (:eval (mood-line-segment-major-mode))
                              (:eval (mood-line-segment-global-mode-string))
                              (:eval (mood-line-segment-flycheck))
