@@ -1,5 +1,5 @@
 # mood-line
-### Version 1.1.2
+### Version 1.2.0
 
 [![MELPA](https://melpa.org/packages/mood-line-badge.svg)](https://melpa.org/#/mood-line)
 [![MELPA Stable](https://stable.melpa.org/packages/mood-line-badge.svg)](https://stable.melpa.org/#/mood-line)
@@ -21,6 +21,8 @@ package.
 * Version control status indicator
 
 * Flycheck status indicator
+
+* Flymake support
 
 * Lightweight with no dependencies
 
