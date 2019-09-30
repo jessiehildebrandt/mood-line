@@ -154,7 +154,6 @@
 ;; Update functions
 ;;
 
-;; VC update function
 (defvar-local mood-line--vc-text nil)
 (defun mood-line--update-vc-segment (&rest _)
   "Update `mood-line--vc-text' against the current VCS state."
@@ -183,7 +182,6 @@
                                   'mouse-face face)
                       "  "))))))
 
-;; Flycheck update function
 (defvar-local mood-line--flycheck-text nil)
 (defun mood-line--update-flycheck-segment (&optional status)
   "Update `mood-line--flycheck-text' against the reported flycheck STATUS."
