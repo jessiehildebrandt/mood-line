@@ -213,7 +213,7 @@
   (if (not (string-match-p "\\*.*\\*" (buffer-name)))
       (if (buffer-modified-p)
           (propertize "● " 'face 'mood-line-modified)
-        (if buffer-read-only
+        (if (and buffer-read-only (buffer-file-name))
             (propertize "■ " 'face 'mood-line-unimportant)
           "  "))
     "  "))
