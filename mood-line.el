@@ -197,7 +197,7 @@
                                                    'mood-line-status-error
                                                  'mood-line-status-warning))))
                        (propertize "✔ Good  " 'face 'mood-line-status-success)))
-          ('running (propertize "𝚫 Checking  " 'face 'mood-line-status-info))
+          ('running (propertize "Δ Checking  " 'face 'mood-line-status-info))
           ('errored (propertize "✖ Error  " 'face 'mood-line-status-error))
           ('interrupted (propertize "⏸ Paused  " 'face 'mood-line-status-neutral))
           ('no-checker ""))))
