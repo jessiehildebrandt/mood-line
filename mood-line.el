@@ -86,6 +86,15 @@
   :group 'mood-line
   :type 'boolean)
 
+(defface mood-line-buffer-name
+  '((t (:inherit (mode-line-buffer-id))))
+  :group 'mood-line)
+
+(defface mood-line-major-mode
+  '((t (:inherit (bold))))
+  "Face used for major mode indicator in the mode-line."
+  :group 'mood-line)
+
 (defface mood-line-status-neutral
   '((t (:inherit (shadow))))
   "Face used for neutral or inactive status indicators in the mode-line."
@@ -218,7 +227,7 @@
 
 (defun mood-line-segment-buffer-name ()
   "Displays the name of the current buffer in the mode-line."
-  (propertize "%b  " 'face 'mode-line-buffer-id))
+  (propertize "%b  " 'face 'mood-line-buffer-name))
 
 (defun mood-line-segment-anzu ()
   "Displays color-coded anzu status information in the mode-line (if available)."
@@ -265,7 +274,7 @@
 
 (defun mood-line-segment-major-mode ()
   "Displays the current major mode in the mode-line."
-  (propertize "%m  " 'face 'bold))
+  (propertize "%m  " 'face 'mood-line-major-mode))
 
 (defun mood-line-segment-misc-info ()
   "Displays the current value of `mode-line-misc-info' in the mode-line."
