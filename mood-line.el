@@ -1,10 +1,10 @@
-;;; mood-line.el --- A minimal mode-line inspired by doom-modeline. -*- lexical-binding: t; -*-
+;;; mood-line.el --- A minimal mode-line inspired by doom-modeline -*- lexical-binding: t; -*-
 
 ;; Author: Jessie Hildebrandt <jessieh.net>
 ;; Homepage: https://gitlab.com/jessieh/mood-line
 ;; Keywords: mode-line faces
 ;; Version: 1.2.1
-;; Package-Requires: ((emacs "24.4"))
+;; Package-Requires: ((emacs "25.1"))
 
 ;; This file is not part of GNU Emacs.
 
