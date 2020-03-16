@@ -134,23 +134,23 @@
 ;; Helper functions
 ;;
 
-(defun --string-trim-left (string)
+(defun mood-line--string-trim-left (string)
   "Remove whitespace at the beginning of STRING."
   (if (string-match "\\`[ \t\n\r]+" string)
       (replace-match "" t t string)
     string))
 
-(defun --string-trim-right (string)
+(defun mood-line--string-trim-right (string)
   "Remove whitespace at the end of STRING."
   (if (string-match "[ \t\n\r]+\\'" string)
       (replace-match "" t t string)
     string))
 
-(defun --string-trim (string)
+(defun mood-line--string-trim (string)
   "Remove whitespace at the beginning and end of STRING."
-  (--string-trim-left (--string-trim-right string)))
+  (mood-line--string-trim-left (mood-line--string-trim-right string)))
 
-(defun --format-mood-line (left right)
+(defun mood-line--format (left right)
   "Return a string of `window-width' length containing LEFT and RIGHT, aligned respectively."
   (let ((reserve (length right)))
     (concat left
@@ -280,7 +280,7 @@
   "Displays the current value of `mode-line-misc-info' in the mode-line."
   (let ((misc-info (format-mode-line mode-line-misc-info 'mood-line-unimportant)))
     (unless (string= misc-info "")
-      (concat (--string-trim misc-info) "  "))))
+      (concat (mood-line--string-trim misc-info) "  "))))
 
 (defun mood-line-segment-flycheck ()
   "Displays color-coded flycheck information in the mode-line (if available)."
@@ -289,12 +289,12 @@
 (defun mood-line-segment-flymake ()
   "Displays information about the current status of flymake in the mode-line (if available)."
   (when (and (boundp 'flymake-mode) flymake-mode)
-    (concat (--string-trim (format-mode-line flymake--mode-line-format)) "  ")))
+    (concat (mood-line--string-trim (format-mode-line flymake--mode-line-format)) "  ")))
 
 (defun mood-line-segment-process ()
   "Displays the current value of `mode-line-process' in the mode-line."
   (when mode-line-process
-    (concat (--string-trim (format-mode-line mode-line-process)) "  ")))
+    (concat (mood-line--string-trim (format-mode-line mode-line-process)) "  ")))
 
 ;;
 ;; Activation function
@@ -324,7 +324,7 @@
         ;; Set the new mode-line-format
         (setq-default mode-line-format
                       '((:eval
-                         (--format-mood-line
+                         (mood-line--format
                           ;; Left
                           (format-mode-line
                            '(" "
