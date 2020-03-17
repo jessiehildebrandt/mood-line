@@ -88,6 +88,7 @@
 
 (defface mood-line-buffer-name
   '((t (:inherit (mode-line-buffer-id))))
+  "Face used for major mode indicator in the mode-line."
   :group 'mood-line)
 
 (defface mood-line-major-mode
