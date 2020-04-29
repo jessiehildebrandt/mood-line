@@ -1,10 +1,10 @@
-;;; mood-line.el --- A minimal mode-line inspired by doom-modeline. -*- lexical-binding: t; -*-
+;;; mood-line.el --- A minimal mode-line inspired by doom-modeline -*- lexical-binding: t; -*-
 
 ;; Author: Jessie Hildebrandt <jessieh.net>
 ;; Homepage: https://gitlab.com/jessieh/mood-line
 ;; Keywords: mode-line faces
 ;; Version: 1.2.1
-;; Package-Requires: ((emacs "24.4"))
+;; Package-Requires: ((emacs "25.1"))
 
 ;; This file is not part of GNU Emacs.
 
@@ -86,6 +86,16 @@
   :group 'mood-line
   :type 'boolean)
 
+(defface mood-line-buffer-name
+  '((t (:inherit (mode-line-buffer-id))))
+  "Face used for major mode indicator in the mode-line."
+  :group 'mood-line)
+
+(defface mood-line-major-mode
+  '((t (:inherit (bold))))
+  "Face used for major mode indicator in the mode-line."
+  :group 'mood-line)
+
 (defface mood-line-status-neutral
   '((t (:inherit (shadow))))
   "Face used for neutral or inactive status indicators in the mode-line."
@@ -125,23 +135,23 @@
 ;; Helper functions
 ;;
 
-(defun --string-trim-left (string)
+(defun mood-line--string-trim-left (string)
   "Remove whitespace at the beginning of STRING."
   (if (string-match "\\`[ \t\n\r]+" string)
       (replace-match "" t t string)
     string))
 
-(defun --string-trim-right (string)
+(defun mood-line--string-trim-right (string)
   "Remove whitespace at the end of STRING."
   (if (string-match "[ \t\n\r]+\\'" string)
       (replace-match "" t t string)
     string))
 
-(defun --string-trim (string)
+(defun mood-line--string-trim (string)
   "Remove whitespace at the beginning and end of STRING."
-  (--string-trim-left (--string-trim-right string)))
+  (mood-line--string-trim-left (mood-line--string-trim-right string)))
 
-(defun --format-mood-line (left right)
+(defun mood-line--format (left right)
   "Return a string of `window-width' length containing LEFT and RIGHT, aligned respectively."
   (let ((reserve (length right)))
     (concat left
@@ -218,7 +228,7 @@
 
 (defun mood-line-segment-buffer-name ()
   "Displays the name of the current buffer in the mode-line."
-  (propertize "%b  " 'face 'mode-line-buffer-id))
+  (propertize "%b  " 'face 'mood-line-buffer-name))
 
 (defun mood-line-segment-anzu ()
   "Displays color-coded anzu status information in the mode-line (if available)."
@@ -265,13 +275,13 @@
 
 (defun mood-line-segment-major-mode ()
   "Displays the current major mode in the mode-line."
-  (propertize "%m  " 'face 'bold))
+  (propertize "%m  " 'face 'mood-line-major-mode))
 
 (defun mood-line-segment-misc-info ()
   "Displays the current value of `mode-line-misc-info' in the mode-line."
   (let ((misc-info (format-mode-line mode-line-misc-info 'mood-line-unimportant)))
     (unless (string= misc-info "")
-      (concat (--string-trim misc-info) "  "))))
+      (concat (mood-line--string-trim misc-info) "  "))))
 
 (defun mood-line-segment-flycheck ()
   "Displays color-coded flycheck information in the mode-line (if available)."
@@ -280,12 +290,12 @@
 (defun mood-line-segment-flymake ()
   "Displays information about the current status of flymake in the mode-line (if available)."
   (when (and (boundp 'flymake-mode) flymake-mode)
-    (concat (--string-trim (format-mode-line flymake--mode-line-format)) "  ")))
+    (concat (mood-line--string-trim (format-mode-line flymake--mode-line-format)) "  ")))
 
 (defun mood-line-segment-process ()
   "Displays the current value of `mode-line-process' in the mode-line."
   (when mode-line-process
-    (concat (--string-trim (format-mode-line mode-line-process)) "  ")))
+    (concat (mood-line--string-trim (format-mode-line mode-line-process)) "  ")))
 
 ;;
 ;; Activation function
@@ -315,7 +325,7 @@
         ;; Set the new mode-line-format
         (setq-default mode-line-format
                       '((:eval
-                         (--format-mood-line
+                         (mood-line--format
                           ;; Left
                           (format-mode-line
                            '(" "
