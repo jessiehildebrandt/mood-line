@@ -249,7 +249,7 @@
 (defun mood-line-segment-position ()
   "Displays the current cursor position in the mode-line."
   (concat "%l:%c"
-          (when mood-line-show-cursor-point (propertize (format ":%d" (point)) 'face))
+          (when mood-line-show-cursor-point (propertize (format ":%d" (point)) 'face 'mood-line-unimportant))
           (propertize " %p%%  " 'face 'mood-line-unimportant)))
 
 (defun mood-line-segment-eol ()
