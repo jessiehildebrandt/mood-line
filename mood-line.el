@@ -280,7 +280,7 @@
 (defun mood-line-segment-misc-info ()
   "Displays the current value of `mode-line-misc-info' in the mode-line."
   (let ((misc-info (format-mode-line mode-line-misc-info 'mood-line-unimportant)))
-    (unless (string= misc-info "")
+    (unless (string= (mood-line--string-trim misc-info) "")
       (concat (mood-line--string-trim misc-info) "  "))))
 
 (defun mood-line-segment-flycheck ()
@@ -294,8 +294,9 @@
 
 (defun mood-line-segment-process ()
   "Displays the current value of `mode-line-process' in the mode-line."
-  (when mode-line-process
-    (concat (mood-line--string-trim (format-mode-line mode-line-process)) "  ")))
+  (let ((process-info (format-mode-line mode-line-process)))
+    (unless (string= (mood-line--string-trim process-info) "")
+      (concat (mood-line--string-trim process-info) "  "))))
 
 ;;
 ;; Activation function
