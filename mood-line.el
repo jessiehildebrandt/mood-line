@@ -275,7 +275,7 @@
 
 (defun mood-line-segment-major-mode ()
   "Displays the current major mode in the mode-line."
-  (propertize "%m  " 'face 'mood-line-major-mode))
+  (concat (format-mode-line mode-name 'mood-line-major-mode) "  "))
 
 (defun mood-line-segment-misc-info ()
   "Displays the current value of `mode-line-misc-info' in the mode-line."
