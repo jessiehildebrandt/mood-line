@@ -28,7 +28,7 @@ package.
 
 ## Preview
 
-![Preview Image](https://gitlab.com/jessieh/mood-line/raw/assets/mood-line.png "Preview Image")
+<img alt="Preview Image" src="./raw/assets/preview.webp" />
 
 ## Installation
 
