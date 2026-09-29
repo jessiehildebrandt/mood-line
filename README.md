@@ -24,6 +24,8 @@ package.
 
 * Flymake support
 
+* Keycast support
+
 * Lightweight with no dependencies
 
 ## Preview

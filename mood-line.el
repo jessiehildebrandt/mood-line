@@ -55,6 +55,7 @@
 (defvar anzu--current-position)
 (defvar anzu--total-matched)
 (defvar multiple-cursors-mode)
+(defvar keycheck-tracking-mode)
 
 ;;
 ;; Function prototypes
@@ -62,6 +63,7 @@
 
 (declare-function flycheck-count-errors "flycheck" (errors))
 (declare-function mc/num-cursors "multiple-cursors" ())
+(declare-function keycast-tracking-segment-value "keycast" ())
 
 ;;
 ;; Config
@@ -298,6 +300,13 @@
     (unless (string= (mood-line--string-trim process-info) "")
       (concat (mood-line--string-trim process-info) "  "))))
 
+(defun mood-line-segment-keycast ()
+  "Return the current value of `keycast-tracking-segment-value'."
+  (when (and (boundp 'keycast-tracking-mode) keycast-tracking-mode)
+    (let ((keycast-info (keycast-tracking-segment-value)))
+      (unless (string= (mood-line--string-trim keycast-info) "")
+        (mood-line--string-trim keycast-info)))))
+
 ;;
 ;; Activation function
 ;;
@@ -334,7 +343,8 @@
                              (:eval (mood-line-segment-buffer-name))
                              (:eval (mood-line-segment-anzu))
                              (:eval (mood-line-segment-multiple-cursors))
-                             (:eval (mood-line-segment-position))))
+                             (:eval (mood-line-segment-position))
+                             (:eval (mood-line-segment-keycast))))
 
                           ;; Right
                           (format-mode-line
